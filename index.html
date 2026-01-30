@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Tailpipe | NotebookLM</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <h1>Project Tailpipe</h1>
+            <p class="tagline">NotebookLM: Minto Pyramid → Slides</p>
+        </header>
+
+        <!-- Progress Steps -->
+        <div class="progress-steps">
+            <div class="step active" data-step="1">
+                <span class="step-number">1</span>
+                <span class="step-label">Upload</span>
+            </div>
+            <div class="step-connector"></div>
+            <div class="step" data-step="2">
+                <span class="step-number">2</span>
+                <span class="step-label">Mind Map</span>
+            </div>
+            <div class="step-connector"></div>
+            <div class="step" data-step="3">
+                <span class="step-number">3</span>
+                <span class="step-label">Slides</span>
+            </div>
+        </div>
+
+        <!-- View 1: Upload -->
+        <section id="upload-view" class="view active">
+            <div class="demo-hero">
+                <h2>Turn your docs into exec-ready presentations</h2>
+                <p>Review a storyboard using mind maps, then generate a slide deck</p>
+                <button class="btn btn-primary btn-large" id="demo-btn">
+                    Try with Sample Document
+                </button>
+            </div>
+
+            <div class="divider">
+                <span>or upload your own</span>
+            </div>
+
+            <div class="upload-zone upload-zone-secondary" id="drop-zone">
+                <div class="upload-icon">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                        <polyline points="17 8 12 3 7 8"/>
+                        <line x1="12" y1="3" x2="12" y2="15"/>
+                    </svg>
+                </div>
+                <p><strong>Drop your document here</strong> or click to browse</p>
+                <input type="file" id="file-input" accept=".txt,.md,.pdf,.docx" hidden>
+                <p class="file-types">Supports: TXT, Markdown, PDF, DOCX</p>
+            </div>
+        </section>
+
+        <!-- View 2: Mind Map Editor -->
+        <section id="mindmap-view" class="view">
+            <div class="mindmap-toolbar">
+                <div class="toolbar-left">
+                    <button class="btn btn-icon" id="back-btn" title="Back to upload">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M19 12H5M12 19l-7-7 7-7"/>
+                        </svg>
+                    </button>
+                    <h2 id="doc-title">Document Title</h2>
+                </div>
+                <div class="toolbar-right">
+                    <button class="btn btn-icon" id="add-node-btn" title="Add node">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="12" y1="8" x2="12" y2="16"/>
+                            <line x1="8" y1="12" x2="16" y2="12"/>
+                        </svg>
+                    </button>
+                    <button class="btn btn-primary" id="generate-btn">
+                        Generate Slides
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="mindmap-container" id="mindmap-container">
+                <div class="mindmap-canvas" id="mindmap-canvas">
+                    <!-- Mind map nodes will be rendered here -->
+                </div>
+            </div>
+
+            <div class="mindmap-legend">
+                <div class="legend-item">
+                    <span class="legend-color level-0"></span>
+                    <span>The Ask / Recommendation</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-color level-1"></span>
+                    <span>Key Arguments</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-color level-2"></span>
+                    <span>Evidence & Data</span>
+                </div>
+            </div>
+
+            <p class="hint">Click to edit • Drag to reorder • Right-click for options</p>
+        </section>
+
+        <!-- View 3: Slides Preview -->
+        <section id="slides-view" class="view">
+            <div class="slides-toolbar">
+                <div class="toolbar-left">
+                    <button class="btn btn-icon" id="back-to-map-btn" title="Back to mind map">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M19 12H5M12 19l-7-7 7-7"/>
+                        </svg>
+                    </button>
+                    <h2>Slide Preview</h2>
+                </div>
+                <div class="toolbar-right">
+                    <button class="btn btn-secondary" id="export-btn">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                            <polyline points="7 10 12 15 17 10"/>
+                            <line x1="12" y1="15" x2="12" y2="3"/>
+                        </svg>
+                        Export
+                    </button>
+                </div>
+            </div>
+
+            <div class="slides-container">
+                <div class="slides-nav">
+                    <div class="slide-thumbnails" id="slide-thumbnails">
+                        <!-- Thumbnails will be rendered here -->
+                    </div>
+                </div>
+                <div class="slide-preview" id="slide-preview">
+                    <!-- Current slide will be rendered here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Context Menu -->
+        <div class="context-menu" id="context-menu">
+            <button class="context-item" data-action="edit">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                </svg>
+                Edit
+            </button>
+            <button class="context-item" data-action="add-child">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <line x1="12" y1="8" x2="12" y2="16"/>
+                    <line x1="8" y1="12" x2="16" y2="12"/>
+                </svg>
+                Add Child
+            </button>
+            <button class="context-item" data-action="add-sibling">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"/>
+                    <rect x="14" y="3" width="7" height="7"/>
+                </svg>
+                Add Sibling
+            </button>
+            <div class="context-divider"></div>
+            <button class="context-item danger" data-action="delete">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="3 6 5 6 21 6"/>
+                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                </svg>
+                Delete
+            </button>
+        </div>
+
+        <!-- Loading Overlay -->
+        <div class="loading-overlay" id="loading-overlay">
+            <div class="loading-spinner"></div>
+            <p id="loading-text">Analyzing document...</p>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
