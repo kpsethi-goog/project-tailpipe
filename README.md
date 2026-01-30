@@ -1,6 +1,6 @@
 # Project Tailpipe
 
-**NotebookLM: Minto Pyramid → Slides**
+**Minto Pyramid → Slides**
 
 Transform documents into executive-ready presentations using the Minto Pyramid principle.
 
