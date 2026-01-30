@@ -14,26 +14,61 @@ const state = {
 // ==================== Sample Data ====================
 
 const sampleDocument = {
-    title: "Q4 Product Strategy Recommendation",
+    title: "Project Tailpipe PRD",
     content: `
-Based on our analysis of market trends, customer feedback, and competitive landscape,
-we recommend focusing Q4 development efforts on mobile-first features.
+# Project Tailpipe - NotebookLM: Minto Pyramid → Slides
 
-Our research shows that 68% of our users now access the platform primarily via mobile devices,
-up from 45% last year. Customer support tickets related to mobile experience have increased
-by 40% quarter-over-quarter.
+## Problem Statement
 
-Competitors like Acme Corp and Beta Inc have recently launched significant mobile updates,
-capturing market share in the 25-34 demographic where we've seen a 12% decline.
+When creating executive presentations, most people structure their slides like research papers—building up from background, through analysis, to conclusions. This is backwards for executive audiences.
 
-The proposed mobile-first strategy includes three key initiatives:
-1. Responsive redesign of the dashboard - our most-used feature
-2. Native mobile app with offline capabilities
-3. Mobile-optimized checkout flow to reduce cart abandonment (currently at 67% on mobile vs 34% on desktop)
+The reality:
+- Executives are time-poor and will interrupt if you bury the lead
+- If your recommendation is on slide 12, they may never see it
+- Questions derail bottom-up presentations; they enhance top-down ones
 
-Investment required: $2.4M over Q4
-Expected ROI: 15% increase in mobile conversion within 6 months
-Risk: Medium - requires reallocation from desktop feature backlog
+The Minto Pyramid Principle (developed at McKinsey) solves this: "You think from the bottom up, but you present from the top down." Start with the answer, then provide supporting arguments, then evidence.
+
+The gap: Most people don't know this framework, and even those who do struggle to restructure their thinking. There's no tool that helps transform a document into pyramid-structured content.
+
+## Solution
+
+A new NotebookLM feature that transforms any uploaded document into a Minto Pyramid mind map, which users can then convert into a slide deck.
+
+User Flow: Upload Doc → AI generates Minto Pyramid Mind Map → User edits/refines → Generate Slide Deck
+
+Core Features:
+- Document Analysis: AI extracts key arguments, supporting points, and evidence from uploaded doc
+- Pyramid Generation: Auto-structures content into Minto hierarchy: Main Point → Key Arguments → Supporting Data
+- Interactive Mind Map: Visual, editable mind map where users can drag, reorder, add, or remove nodes
+- Slide Generation: One-click conversion from finalized mind map to presentation slides
+
+## Target Users
+
+- Primary: Business professionals creating executive presentations
+- Secondary: Consultants, analysts, product managers preparing stakeholder decks
+- Use case: Transforming research, analysis docs, or meeting notes into exec-ready presentations
+
+## Success Metrics
+
+- Time to first slide deck: < 5 minutes from doc upload
+- User edits on mind map: Avg 3-5 refinements (engagement signal)
+- Feature adoption: 20% of NotebookLM users try within first month
+- NPS for generated decks: > 40
+
+## MVP Scope
+
+In Scope:
+- Single document upload (PDF, Google Doc, text)
+- AI-generated pyramid mind map with 3 levels
+- Drag-and-drop mind map editing
+- Basic slide deck export (Google Slides format)
+
+Out of Scope (v1):
+- Multiple document synthesis
+- Custom slide templates/themes
+- Real-time collaboration on mind map
+- Presentation coaching/speaker notes
 `
 };
 
